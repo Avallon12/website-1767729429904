@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Nexus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <style>
+    :root {
+      --primary: #6366F1; /* Indigo */
+      --secondary: #EC4899; /* Pink */
+      --dark: #111827; /* Gray 900 */
+      --body-font: 'Inter', sans-serif;
+      --heading-font: 'Plus Jakarta Sans', sans-serif;
+    }
+    body { font-family: var(--body-font); background-color: #f9fafb; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); }
+    .gradient-text { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background-color: rgba(255, 255, 255, 0.85); }
+    .nav-link { position: relative; padding-bottom: 4px; }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s ease-out; }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); transition: all 0.3s ease-out; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4); }
+    .form-input { transition: all 0.3s ease-out; }
+    .form-input:focus { ring-color: var(--primary); border-color: var(--primary); }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.6s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <!-- NAVIGATION -->
+  <header class="fixed w-full top-0 z-50">
+    <nav class="glass-nav border-b border-gray-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <a href="index.html" class="text-3xl font-extrabold">
+            <span class="gradient-text">Nexus</span>
+          </a>
+          <div class="hidden md:flex items-center space-x-10">
+            <a href="index.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Home</a>
+            <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">About</a>
+            <a href="services.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Services</a>
+            <a href="contact.html" class="nav-link text-gray-900 font-semibold active">Contact</a>
+          </div>
+          <div class="hidden md:block">
+            <a href="services.html" class="btn-primary text-white px-6 py-2.5 rounded-full font-semibold">Get Started</a>
+          </div>
+          <button class="md:hidden text-gray-800"><i class="fas fa-bars text-2xl"></i></button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- CONTACT SECTION -->
+    <section class="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center reveal">
+                <h1 class="text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tighter">Get in Touch</h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-600 leading-relaxed">
+                    We'd love to hear from you. Whether you have a question about features, trials, pricing, or anything else, our team is ready to answer all your questions.
+                </p>
+            </div>
+
+            <div class="mt-16 grid lg:grid-cols-2 gap-16">
+                <!-- Contact Form -->
+                <div class="reveal bg-gray-50 p-8 lg:p-12 rounded-2xl border border-gray-200">
+                    <h2 class="text-3xl font-bold text-gray-900">Send us a Message</h2>
+                    <form action="#" method="POST" class="mt-8 space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="first-name" class="block text-sm font-medium text-gray-700">First Name</label>
+                                <input type="text" name="first-name" id="first-name" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm py-3 px-4">
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                                <input type="text" name="last-name" id="last-name" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm py-3 px-4">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" name="email" id="email" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm py-3 px-4">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                            <textarea name="message" id="message" rows="5" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm py-3 px-4"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full btn-primary text-white py-3 px-6 rounded-lg font-semibold text-lg">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="reveal">
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-bold text-gray-900">Our Office</h3>
+                                <p class="mt-1 text-gray-600">123 Innovation Drive, Tech City, San Francisco, CA 94105</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-bold text-gray-900">Email Us</h3>
+                                <p class="mt-1 text-gray-600">General: hello@nexus.com</p>
+                                <p class="mt-1 text-gray-600">Support: support@nexus.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-bold text-gray-900">Call Us</h3>
+                                <p class="mt-1 text-gray-600">Sales: +1 (555) 123-4567</p>
+                                <p class="mt-1 text-gray-600">Support: +1 (555) 987-6543</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Map Placeholder -->
+                    <div class="mt-12 h-64 bg-gradient-to-br from-indigo-200 to-pink-200 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-map-marked-alt text-5xl text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-white">
+    <!-- ... same footer as index.html ... -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div>
+          <a href="index.html" class="text-3xl font-extrabold mb-4 inline-block">
+            <span class="gradient-text">Nexus</span>
+          </a>
+          <p class="text-gray-400">Pioneering the next wave of digital innovation.</p>
+          <div class="flex gap-4 mt-6">
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-indigo-500 transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-indigo-500 transition"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-indigo-500 transition"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Navigation</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+            <li><a href="services.html" class="hover:text-white transition">Services</a></li>
+            <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Legal</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-white transition">Cookie Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Contact Us</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-indigo-400"></i>123 Innovation Drive, Tech City, 94105</li>
+            <li class="flex items-center"><i class="fas fa-envelope mr-3 text-indigo-400"></i>hello@nexus.com</li>
+            <li class="flex items-center"><i class="fas fa-phone mr-3 text-indigo-400"></i>+1 (555) 123-4567</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+        <p>&copy; 2024 Nexus Technologies Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Stripe Init
+    const stripe = Stripe('pk_test_51ScwfS0Afn09g23Qy2nzvHVaAYxy4jWxr0NaTTB7PKo5n852Ay4mYmG3dBGlxjV9aVwn3u1kciZamxGxZieaP84T00MwNl1iR4');
+    
+    // Stripe Checkout Function
+    async function handleStripeCheckout(priceId, productName, amount) { /* ... same as index.html ... */ }
+
+    // Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
